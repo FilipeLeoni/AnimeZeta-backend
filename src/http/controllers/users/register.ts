@@ -31,8 +31,7 @@ export async function register(req: Request, res: Response) {
 
     return res.status(500).send();
   }
-  console.log('user created');
-  return res.status(201).send();
+  return res.status(201).send('User Created');
 }
 
 export async function getUser(req: Request, res: Response) {

@@ -10,8 +10,10 @@ export async function profile(req: Request, res: Response) {
     const getUserProfile = makeGetUserProfileUseCase();
 
     const { user } = await getUserProfile.execute({
-      userId: req.auth.sub,
+      userId: req.user.sub,
     });
+
+    const { username, password } = req.params;
 
     return res.status(200).json({
       user: {
@@ -20,7 +22,6 @@ export async function profile(req: Request, res: Response) {
       },
     });
   } catch (err) {
-    console.log(err);
     return res.status(500).send();
   }
 }

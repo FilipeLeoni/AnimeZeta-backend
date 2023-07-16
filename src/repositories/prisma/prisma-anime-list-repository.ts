@@ -1,8 +1,16 @@
 import { prisma } from '@/lib/prisma';
-import { Prisma } from '@prisma/client';
 import { AnimesRepository } from '../animes-repository';
+import { GetResult } from '@prisma/client/runtime/library';
 
 export class PrismaAnimeListRepository implements AnimesRepository {
+  async findAnimesByUserId(userId: string) {
+    const animes = await prisma.anime.findMany({
+      where: { userId },
+    });
+
+    return animes;
+  }
+
   async findByJikanId(jikanId: string) {
     const anime = await prisma.anime.findFirst({
       where: {

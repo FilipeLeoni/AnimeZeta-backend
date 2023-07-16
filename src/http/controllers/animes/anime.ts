@@ -8,12 +8,11 @@ export async function anime(req: Request, res: Response) {
     title: z.string(),
     imageUrl: z.string(),
     status: z.string(),
-    userId: z.string(),
   });
 
-  const { jikanId, title, imageUrl, status, userId } = animeBodySchema.parse(
-    req.body,
-  );
+  const { jikanId, title, imageUrl, status } = animeBodySchema.parse(req.body);
+
+  const userId = req.user.sub;
 
   try {
     const AnimeListUseCase = makeAnimeListUseCase();

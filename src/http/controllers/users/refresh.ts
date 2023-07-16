@@ -45,7 +45,6 @@ export async function refresh(req: Request, res: Response) {
         .json({ message: 'Erro ao processar o token de refresh' });
     }
   } catch (error) {
-    const refreshToken = req;
-    return console.log(refreshToken);
+    return res.status(500).json({ message: 'Server error' });
   }
 }

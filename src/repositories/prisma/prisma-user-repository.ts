@@ -23,12 +23,24 @@ export class PrismaUserRepository implements UsersRepository {
 
     return user;
   }
+
   async create(data: Prisma.UserCreateInput) {
-    console.log(data);
     const user = await prisma.user.create({
       data,
     });
 
     return user;
+  }
+
+  async save(id: string, username?: string, password?: string) {
+    const userUpdated = await prisma.user.update({
+      where: { id: id },
+      data: {
+        username,
+        password,
+      },
+    });
+
+    return userUpdated;
   }
 }
