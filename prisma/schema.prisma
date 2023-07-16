@@ -37,3 +37,9 @@ model Episode {
   number  Int
   status  String @map(name: "episodeStatus")
 }
+
+enum Status {
+  PLAN_TO_WATCH
+  WATCHING
+  COMPLETED
+}
