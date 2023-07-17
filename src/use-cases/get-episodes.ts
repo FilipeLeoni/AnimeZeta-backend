@@ -3,36 +3,21 @@ import { EpisodesRepository } from '@/repositories/episodes-repository';
 
 interface AddEpisodeToListUseCaseRequest {
   animeId: string;
-  number: number;
-  status: string;
 }
 
 interface AddEpisodeToListUseCaseResponse {
-  episode: Episode;
+  episode: Episode[] | null;
 }
 
-export class AddEpisodeUseCase {
+export class GetEpisodeUseCase {
   constructor(private episodesRepository: EpisodesRepository) {}
 
   async execute({
     animeId,
-    number,
-    status,
   }: AddEpisodeToListUseCaseRequest): Promise<AddEpisodeToListUseCaseResponse> {
-    const episodeExists = await this.episodesRepository.findByAnimeIdAndNumber(
+    const episode = await this.episodesRepository.findEpisodesByAnimeId(
       animeId,
-      number,
     );
-
-    if (episodeExists) {
-      throw new Error('Episode already exists');
-    }
-
-    const episode = await this.episodesRepository.create({
-      animeId,
-      number,
-      status,
-    });
 
     return {
       episode,

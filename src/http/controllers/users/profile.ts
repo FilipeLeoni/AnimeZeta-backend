@@ -13,8 +13,6 @@ export async function profile(req: Request, res: Response) {
       userId: req.user.sub,
     });
 
-    const { username, password } = req.params;
-
     return res.status(200).json({
       user: {
         ...user,

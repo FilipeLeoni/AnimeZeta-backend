@@ -1,6 +1,4 @@
 import { Request, Response } from 'express';
-import { z } from 'zod';
-import { makeAnimeListUseCase } from '@/use-cases/factories/make-anime-list-use-case';
 import { makeGetAnimeList } from '@/use-cases/factories/make-get-anime-list-use-case';
 
 export async function getAnimeList(req: Request, res: Response) {

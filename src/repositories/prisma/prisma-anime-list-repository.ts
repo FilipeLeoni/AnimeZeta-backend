@@ -1,7 +1,5 @@
 import { prisma } from '@/lib/prisma';
 import { AnimesRepository } from '../animes-repository';
-import { GetResult } from '@prisma/client/runtime/library';
-import { AnimeStatus } from '@/@types/animeStatus';
 
 export class PrismaAnimeListRepository implements AnimesRepository {
   async findAnime(id: string) {

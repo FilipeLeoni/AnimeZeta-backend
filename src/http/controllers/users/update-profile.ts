@@ -13,7 +13,7 @@ export async function updateProfile(req: Request, res: Response) {
   try {
     const updateUserUseCase = makeUpdateProfileUseCase();
 
-    const { user } = await updateUserUseCase.execute({
+    await updateUserUseCase.execute({
       userId: req.user.sub,
       username,
       password,

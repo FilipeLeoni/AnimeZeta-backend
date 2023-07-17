@@ -1,15 +1,4 @@
 import { AnimesRepository } from '@/repositories/animes-repository';
-import { Anime } from '@prisma/client';
-import { AnimeAlredyAdded } from './errors/anime-alredy-added';
-
-interface GetAnimeListUseCaseRequest {
-  userId: string;
-}
-
-interface GetAnimeListUseCaseResponse {
-  anime: Anime;
-}
-
 export class GetAnimeListUseCase {
   constructor(private AnimesRepository: AnimesRepository) {}
 

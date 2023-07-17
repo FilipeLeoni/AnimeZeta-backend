@@ -1,6 +1,5 @@
 import { AnimesRepository } from '@/repositories/animes-repository';
 import { Anime } from '@prisma/client';
-import { AnimeAlredyAdded } from './errors/anime-alredy-added';
 import { ResourceNotFoundError } from './errors/resource-not-found-error';
 import { AnimeStatus } from '@/@types/animeStatus';
 
