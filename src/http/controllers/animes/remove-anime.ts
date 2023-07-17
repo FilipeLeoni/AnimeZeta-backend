@@ -4,12 +4,8 @@ import { z } from 'zod';
 import { makeRemoveAnime } from '@/use-cases/factories/make-remove-anime-use-case';
 
 export async function RemoveAnime(req: Request, res: Response) {
-  const RemoveAnimeBodySchema = z.object({
-    id: z.string(),
-  });
-
   try {
-    const { id } = RemoveAnimeBodySchema.parse(req.body);
+    const { id } = req.params;
     const userId = req.user.sub;
     const RemoveAnimeUseCase = makeRemoveAnime();
 

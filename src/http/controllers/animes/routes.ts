@@ -9,7 +9,7 @@ const router = Router();
 
 router.post('/mylist', jwtAuthenticate, anime);
 router.get('/mylist', jwtAuthenticate, getAnimeList);
-router.patch('/status', jwtAuthenticate, UpdateAnimeStatus);
-router.delete('/anime', jwtAuthenticate, RemoveAnime);
+router.patch('/status/:id', jwtAuthenticate, UpdateAnimeStatus);
+router.delete('/anime/:id', jwtAuthenticate, RemoveAnime);
 
 export default router;

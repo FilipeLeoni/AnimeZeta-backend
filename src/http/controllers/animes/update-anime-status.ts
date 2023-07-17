@@ -1,17 +1,13 @@
 import { Request, Response } from 'express';
-import { z } from 'zod';
 import { makeUpdateAnimeStatus } from '@/use-cases/factories/make-update-anime-status-use-case';
+import { z } from 'zod';
 
 export async function UpdateAnimeStatus(req: Request, res: Response) {
-  const UpdateAnimeStatusBodySchema = z.object({
-    id: z.string(),
-    status: z.any(),
-  });
-
-  const userId = req.user.sub;
-
   try {
-    const { id, status } = UpdateAnimeStatusBodySchema.parse(req.body);
+    const userId = req.user.sub;
+    const status = req.body.status;
+    const { id } = req.params;
+
     const UpdateAnimeStatusUseCase = makeUpdateAnimeStatus();
 
     const anime = await UpdateAnimeStatusUseCase.execute({
