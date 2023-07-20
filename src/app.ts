@@ -8,7 +8,7 @@ export const app = express();
 
 const cors = require('cors');
 const corsOptions = {
-  origin: '*',
+  origin: 'http://localhost:3000',
   credentials: true,
   optionSuccessStatus: 200,
 };
