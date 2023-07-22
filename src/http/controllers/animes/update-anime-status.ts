@@ -3,20 +3,25 @@ import { makeUpdateAnimeStatus } from '@/use-cases/factories/make-update-anime-s
 import { z } from 'zod';
 
 export async function UpdateAnimeStatus(req: Request, res: Response) {
+  const schema = z.object({
+    status: z.string().optional(),
+    episodes: z.number().optional(),
+  });
   try {
     const userId = req.user.sub;
-    const status = req.body.status;
     const { id } = req.params;
+    const { status, episodes } = schema.parse(req.body);
 
     const UpdateAnimeStatusUseCase = makeUpdateAnimeStatus();
 
     const anime = await UpdateAnimeStatusUseCase.execute({
       id,
       status,
+      episodes,
       userId,
     });
 
-    return res.status(200).json({ anime });
+    return res.status(200).json(anime);
   } catch (err) {
     return res.status(500).json({ error: 'Failed to create anime' });
   }

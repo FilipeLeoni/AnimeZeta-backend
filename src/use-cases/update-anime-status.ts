@@ -5,12 +5,13 @@ import { AnimeStatus } from '@/@types/animeStatus';
 
 interface AnimeListUseCaseRequest {
   id: string;
-  status: AnimeStatus;
+  status?: any;
+  episodes?: number;
   userId: string;
 }
 
 interface AnimeListUseCaseResponse {
-  updateAnime: Anime;
+  data: Anime;
 }
 
 export class UpdateAnimeStatus {
@@ -19,18 +20,19 @@ export class UpdateAnimeStatus {
   async execute({
     id,
     status,
+    episodes,
     userId,
   }: AnimeListUseCaseRequest): Promise<AnimeListUseCaseResponse> {
-    const anime = await this.AnimesRepository.findAnime(id, userId);
+    const animeFound = await this.AnimesRepository.findAnime(id, userId);
 
-    if (!anime) {
+    if (!animeFound) {
       throw new ResourceNotFoundError();
     }
 
-    const updateAnime = await this.AnimesRepository.updateStatus(id, status);
+    const data = await this.AnimesRepository.updateStatus(id, status, episodes);
 
     return {
-      updateAnime,
+      data,
     };
   }
 }

@@ -10,11 +10,12 @@ export class PrismaAnimeListRepository implements AnimesRepository {
     return animes;
   }
 
-  async updateStatus(id: string, status: any) {
+  async updateStatus(id: string, status?: any, episodes?: any) {
     const anime = await prisma.anime.update({
       where: { id },
       data: {
         status,
+        episodes,
       },
     });
 
