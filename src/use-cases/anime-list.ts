@@ -8,6 +8,7 @@ interface AnimeListUseCaseRequest {
   imageUrl: string;
   status: string;
   userId: string;
+  episodes: number;
 }
 
 interface AnimeListUseCaseResponse {
@@ -23,6 +24,7 @@ export class AnimeListUseCase {
     imageUrl,
     status,
     userId,
+    episodes,
   }: AnimeListUseCaseRequest): Promise<AnimeListUseCaseResponse> {
     const addSameAnime = await this.AnimesRepository.findByJikanId(jikanId);
 
@@ -36,6 +38,7 @@ export class AnimeListUseCase {
       imageUrl,
       status,
       userId,
+      episodes,
     });
 
     return {

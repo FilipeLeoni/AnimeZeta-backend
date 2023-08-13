@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { z } from 'zod';
 import { makeAnimeListUseCase } from '@/use-cases/factories/make-anime-list-use-case';
+import { AnimeAlredyAdded } from '@/use-cases/errors/anime-alredy-added';
 
 export async function anime(req: Request, res: Response) {
   const animeBodySchema = z.object({
@@ -8,9 +9,12 @@ export async function anime(req: Request, res: Response) {
     title: z.string(),
     imageUrl: z.string(),
     status: z.string(),
+    episodes: z.number(),
   });
 
-  const { jikanId, title, imageUrl, status } = animeBodySchema.parse(req.body);
+  const { jikanId, title, imageUrl, status, episodes } = animeBodySchema.parse(
+    req.body,
+  );
 
   const userId = req.user.sub;
 
@@ -23,9 +27,13 @@ export async function anime(req: Request, res: Response) {
       imageUrl,
       status,
       userId,
+      episodes,
     });
   } catch (err) {
-    return res.status(500).json({ error: 'Failed to create anime' });
+    if (err instanceof AnimeAlredyAdded) {
+      return res.status(409).send({ message: err.message });
+    }
+    return res.status(500).json({ error: 'Failed to add anime to list' });
   }
   return res.status(201).send();
 }
