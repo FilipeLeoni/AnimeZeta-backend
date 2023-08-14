@@ -28,7 +28,7 @@ export async function refresh(req: Request, res: Response) {
       res.cookie('refreshToken', newRefreshToken, {
         path: '/',
         secure: true,
-        sameSite: 'lax',
+        sameSite: 'none',
         httpOnly: true,
         signed: false,
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
