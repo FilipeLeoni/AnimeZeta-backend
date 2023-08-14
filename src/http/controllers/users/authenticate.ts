@@ -32,7 +32,7 @@ export async function authenticate(req: Request, res: Response) {
     return res
       .cookie('refreshToken', refreshToken, {
         path: '/',
-        secure: true,
+        secure: false,
         sameSite: true,
         httpOnly: true,
         signed: false,
