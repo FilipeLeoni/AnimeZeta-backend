@@ -33,7 +33,7 @@ export async function authenticate(req: Request, res: Response) {
       .cookie('refreshToken', refreshToken, {
         path: '/',
         secure: false,
-        sameSite: true,
+        sameSite: 'none',
         httpOnly: true,
         signed: false,
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
