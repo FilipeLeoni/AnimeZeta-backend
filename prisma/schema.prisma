@@ -20,12 +20,13 @@ model User {
 }
 
 model Anime {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
-  jikanId  String
-  title    String
-  imageUrl String
-  status   String
-  userId   String @db.ObjectId
-  user     User?  @relation("UserAnime", fields: [userId], references: [id])
-  episodes Int    @default(0)
+  id              String @id @default(auto()) @map("_id") @db.ObjectId
+  jikanId         String
+  title           String
+  imageUrl        String
+  status          String
+  userId          String @db.ObjectId
+  user            User?  @relation("UserAnime", fields: [userId], references: [id])
+  episodeProgress Int    @default(0)
+  episodes        Int
 }

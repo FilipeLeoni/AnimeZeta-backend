@@ -9,12 +9,12 @@ export async function anime(req: Request, res: Response) {
     title: z.string(),
     imageUrl: z.string(),
     status: z.string(),
-    episodes: z.number(),
+    episodeProgress: z.number().default(0),
+    episodes: z.number().optional(),
   });
 
-  const { jikanId, title, imageUrl, status, episodes } = animeBodySchema.parse(
-    req.body,
-  );
+  const { jikanId, title, imageUrl, status, episodes, episodeProgress } =
+    animeBodySchema.parse(req.body);
 
   const userId = req.user.sub;
 
@@ -27,13 +27,14 @@ export async function anime(req: Request, res: Response) {
       imageUrl,
       status,
       userId,
+      episodeProgress,
       episodes,
     });
   } catch (err) {
     if (err instanceof AnimeAlredyAdded) {
       return res.status(409).send({ message: err.message });
     }
-    return res.status(500).json({ error: 'Failed to add anime to list' });
+    return res.status(500).json({ message: 'Failed to add anime to list' });
   }
   return res.status(201).send();
 }

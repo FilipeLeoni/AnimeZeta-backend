@@ -11,6 +11,6 @@ export async function getAnimeList(req: Request, res: Response) {
 
     return res.status(200).json({ animeList });
   } catch (err) {
-    return res.status(500).json({ error: 'Failed to create anime' });
+    return res.status(500).json({ message: 'Failed to create anime' });
   }
 }
