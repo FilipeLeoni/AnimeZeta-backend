@@ -8,6 +8,7 @@ interface AnimeListUseCaseRequest {
   imageUrl: string;
   status: string;
   userId: string;
+  rating?: number;
   episodeProgress: number;
   episodes?: number;
 }
@@ -25,6 +26,7 @@ export class AnimeListUseCase {
     imageUrl,
     status,
     userId,
+    rating,
     episodeProgress,
     episodes,
   }: AnimeListUseCaseRequest): Promise<AnimeListUseCaseResponse> {
@@ -40,6 +42,7 @@ export class AnimeListUseCase {
       imageUrl,
       status,
       userId,
+      rating,
       episodeProgress,
       episodes,
     });

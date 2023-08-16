@@ -27,6 +27,7 @@ model Anime {
   status          String
   userId          String @db.ObjectId
   user            User?  @relation("UserAnime", fields: [userId], references: [id])
+  rating          Float?
   episodeProgress Int    @default(0)
-  episodes        Int
+  episodes        Int?
 }

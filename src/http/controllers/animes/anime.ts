@@ -9,12 +9,20 @@ export async function anime(req: Request, res: Response) {
     title: z.string(),
     imageUrl: z.string(),
     status: z.string(),
+    rating: z.number().optional(),
     episodeProgress: z.number().default(0),
     episodes: z.number().optional(),
   });
 
-  const { jikanId, title, imageUrl, status, episodes, episodeProgress } =
-    animeBodySchema.parse(req.body);
+  const {
+    jikanId,
+    title,
+    imageUrl,
+    status,
+    rating,
+    episodes,
+    episodeProgress,
+  } = animeBodySchema.parse(req.body);
 
   const userId = req.user.sub;
 
@@ -27,6 +35,7 @@ export async function anime(req: Request, res: Response) {
       imageUrl,
       status,
       userId,
+      rating,
       episodeProgress,
       episodes,
     });
