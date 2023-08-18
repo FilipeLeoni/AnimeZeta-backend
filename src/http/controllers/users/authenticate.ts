@@ -39,7 +39,14 @@ export async function authenticate(req: Request, res: Response) {
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
       })
       .status(200)
-      .json({ accessToken, username: user.username });
+      .json({
+        user: {
+          id: user.id,
+          username: user.username,
+          avatarUrl: user.avatarUrl,
+        },
+        accessToken,
+      });
   } catch (err) {
     if (err instanceof InvalidCredentialsError) {
       return res.status(400).send({ message: err.message });
