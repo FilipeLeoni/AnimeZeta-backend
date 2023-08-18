@@ -4,6 +4,7 @@ import usersRoutes from './http/controllers/users/routes';
 import animesRoutes from './http/controllers/animes/routes';
 
 export const app = express();
+const path = require('path');
 
 app.use(function (req, res, next) {
   const allowedOrigins = [
@@ -31,6 +32,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(cookieParser());
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(usersRoutes);
 app.use(animesRoutes);
