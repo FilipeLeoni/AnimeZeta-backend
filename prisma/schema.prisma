@@ -15,7 +15,7 @@ model User {
   username  String   @unique
   email     String   @unique
   password  String
-  avatarUrl String
+  avatarUrl String   @default("public/images/predefined/default.jpg")
   createdAt DateTime @default(now())
   anime     Anime[]  @relation("UserAnime")
 }
