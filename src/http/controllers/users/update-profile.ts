@@ -6,9 +6,12 @@ export async function updateProfile(req: Request, res: Response) {
   const updateProfileBodySchema = z.object({
     username: z.string().min(3).optional(),
     password: z.string().min(6).optional(),
+    avatarUrl: z.string().min(3).optional(),
   });
 
-  const { username, password } = updateProfileBodySchema.parse(req.body);
+  const { username, password, avatarUrl } = updateProfileBodySchema.parse(
+    req.body,
+  );
 
   try {
     const updateUserUseCase = makeUpdateProfileUseCase();
@@ -17,6 +20,7 @@ export async function updateProfile(req: Request, res: Response) {
       userId: req.user.sub,
       username,
       password,
+      avatarUrl,
     });
 
     return res.status(200).json({ message: 'User updated successfully' });

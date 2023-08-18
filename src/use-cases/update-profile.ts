@@ -6,6 +6,7 @@ interface updateProfileUseCaseRequest {
   userId: string;
   username?: string;
   password?: string;
+  avatarUrl?: string;
 }
 
 interface updateProfileUseCaseResponse {
@@ -19,6 +20,7 @@ export class updateProfileUseCase {
     userId,
     username,
     password,
+    avatarUrl,
   }: updateProfileUseCaseRequest): Promise<updateProfileUseCaseResponse> {
     const user = await this.UsersRepository.findById(userId);
 
@@ -34,7 +36,16 @@ export class updateProfileUseCase {
       user.password = password;
     }
 
-    await this.UsersRepository.save(user.id, user.username, user.password);
+    if (avatarUrl) {
+      user.avatarUrl = avatarUrl;
+    }
+
+    await this.UsersRepository.save(
+      user.id,
+      user.username,
+      user.password,
+      user.avatarUrl,
+    );
 
     return {
       user,

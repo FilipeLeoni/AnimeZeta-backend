@@ -15,6 +15,7 @@ model User {
   username  String   @unique
   email     String   @unique
   password  String
+  avatarUrl String
   createdAt DateTime @default(now())
   anime     Anime[]  @relation("UserAnime")
 }

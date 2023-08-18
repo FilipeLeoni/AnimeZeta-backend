@@ -31,12 +31,18 @@ export class PrismaUserRepository implements UsersRepository {
     return user;
   }
 
-  async save(id: string, username?: string, password?: string) {
+  async save(
+    id: string,
+    username?: string,
+    password?: string,
+    avatarUrl?: string,
+  ) {
     const userUpdated = await prisma.user.update({
       where: { id: id },
       data: {
         username,
         password,
+        avatarUrl,
       },
     });
 
