@@ -40,11 +40,9 @@ export async function authenticate(req: Request, res: Response) {
       })
       .status(200)
       .json({
-        user: {
-          id: user.id,
-          username: user.username,
-          avatarUrl: user.avatarUrl,
-        },
+        id: user.id,
+        username: user.username,
+        avatarUrl: user.avatarUrl,
         accessToken,
       });
   } catch (err) {
