@@ -3,7 +3,8 @@ export interface UserProfileDTO {
   username: string;
   email: string;
   avatarUrl: string;
+  createdAt: Date;
   totalAnimeCount: number;
-  completedAnimeCount: number;
-  totalEpisodesWatched: number;
+  animesCompleted: number;
+  episodesWatched: number;
 }

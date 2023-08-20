@@ -19,10 +19,10 @@ export class PrismaUserRepository implements UsersRepository {
     }
 
     const totalAnimeCount = user.anime.length;
-    const completedAnimeCount = user.anime.filter(
+    const animesCompleted = user.anime.filter(
       anime => anime.status === 'Completed',
     ).length;
-    const totalEpisodesWatched = user.anime.reduce(
+    const episodesWatched = user.anime.reduce(
       (total, anime) => total + anime.episodeProgress,
       0,
     );
@@ -32,9 +32,10 @@ export class PrismaUserRepository implements UsersRepository {
       username: user.username,
       email: user.email,
       avatarUrl: user.avatarUrl,
+      createdAt: user.createdAt,
       totalAnimeCount,
-      completedAnimeCount,
-      totalEpisodesWatched,
+      animesCompleted,
+      episodesWatched,
     };
 
     return userProfile;
